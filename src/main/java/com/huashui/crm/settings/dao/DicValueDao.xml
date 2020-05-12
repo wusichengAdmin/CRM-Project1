@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huashui.crm.settings.dao.DicValueDao">
+
+    <select id="getValueListByTypeCode" resultType="DicValue">
+
+        select * from tbl_dic_value where typeCode = #{code} order by orderNo
+
+    </select>
+
+
+    <insert id="saveValue">
+        insert into tbl_dic_value(id,value,text,orderNo,typeCode)
+
+        values(#{id},#{value},#{text},#{orderNo},#{typeCode})
+    </insert>
+
+
+    <select id="getValueList" resultType="DicValue">
+
+        select * from tbl_dic_value
+    </select>
+
+    <delete id="deleteValue">
+
+        delete from tbl_dic_value
+
+        where id in
+
+        <foreach collection="array" open="(" close=")" item="id" separator=",">
+            #{id}
+        </foreach>
+
+    </delete>
+
+
+    <delete id="deleteValueByTypeCodes">
+
+        delete from tbl_dic_value
+
+        where typeCode in
+        <!--
+            使用动态sql，foreach标签，动态的拼接(code1，code2，code3)
+
+            collection：根据判断接收的是数组还是集合，有两种取值
+                        数组：array
+                        集合：list
+
+            item：每一次遍历出来的元素的表示，在foreach循环体中需要搭配#{}来使用
+
+        -->
+        <foreach collection="array" open="(" close=")" item="code" separator=",">
+
+            #{code}
+
+        </foreach>
+    </delete>
+
+    <select id="getValueById" resultType="DicValue">
+        select * from tbl_dic_value where id=#{id}
+    </select>
+
+    <update id="updateValue">
+        update tbl_dic_value
+        set
+        value=#{value},text=#{text},orderNo=#{orderNo}
+        where id=#{id}
+    </update>
+</mapper>

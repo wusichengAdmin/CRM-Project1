@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huashui.crm.workbench.dao.StudentDao">
+
+    <insert id="saveStudent">
+
+        insert into tbl_student(
+
+           id,
+           name,
+           address,
+           phone,
+           contactName,
+           description
+
+        )values (
+
+           #{id},
+           #{name},
+           #{address},
+           #{phone},
+           #{contactName},
+           #{description}
+
+        )
+
+
+    </insert>
+
+    <select id="getStudent" resultType="Student">
+
+        select
+        name,
+        address,
+        phone,
+        contactName
+
+        from tbl_student
+
+        <where>
+            <if test="name!=null and name!=''">
+
+                name like '%' #{name} '%'
+
+            </if>
+            <if test="address!=null and address!=''">
+
+                and address like '%' #{address} '%'
+
+            </if>
+            <if test="phone!=null and phone!=''">
+
+                and phone like '%' #{phone} '%'
+
+            </if>
+            <if test="contactName!=null and contactName!=''">
+
+                and contactName like '%' #{contactName} '%'
+
+            </if>
+
+
+        </where>
+
+        limit #{passCount},#{pageSize}
+    </select>
+
+    <select id="getTotalStudent" resultType="int">
+
+        select count(*) from tbl_student
+
+        <where>
+            <if test="name!=null and name!=''">
+
+                name like '%' #{name} '%'
+
+            </if>
+            <if test="address!=null and address!=''">
+
+                and address like '%' #{address} '%'
+
+            </if>
+            <if test="phone!=null and phone!=''">
+
+                and phone like '%' #{phone} '%'
+
+            </if>
+            <if test="contactName!=null and contactName!=''">
+
+                and contactName like '%' #{contactName} '%'
+
+            </if>
+
+
+        </where>
+
+    </select>
+
+
+
+
+</mapper>

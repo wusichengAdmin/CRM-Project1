@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huashui.crm.workbench.dao.CustomerRemarkDao">
+
+
+    <insert id="saveCustomerRemark">
+
+        <!--insert into tbl_customer_remark
+        (
+        id,
+        noteContent,
+        createBy,
+        createTime,
+        editFlag,
+        customerId
+
+        )
+        values
+        <foreach collection="list" item="cus" separator=",">
+        (
+        #{cus.id},
+        #{cus.noteContent},
+        #{cus.createBy},
+        #{cus.createTime},
+        #{cus.editFlag},
+        #{cus.customerId}
+        )
+        </foreach>-->
+
+        insert into tbl_customer_remark(
+        id,
+        noteContent,
+        createBy,
+        createTime,
+        editFlag,
+        customerId
+        )values
+        <foreach collection="list" item="cr" separator=",">
+            (
+            #{cr.id},
+            #{cr.noteContent},
+            #{cr.createBy},
+            #{cr.createTime},
+            #{cr.editFlag},
+            #{cr.customerId}
+            )
+        </foreach>
+
+    </insert>
+  	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
